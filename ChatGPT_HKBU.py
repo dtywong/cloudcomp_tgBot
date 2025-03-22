@@ -1,14 +1,30 @@
 import configparser
+import os
 import requests
+import logging #Add missing import
 
 
 class HKBU_ChatGPT():
-    def __init__(self, config_='config.ini'):
-        if type(config_) == str:
-            self.config = configparser.ConfigParser()
-            self.config.read(config_)
-        elif type(config_) == configparser.ConfigParser:
-            self.config = config_
+    # def __init__(self, config_='config.ini'):
+    #     if type(config_) == str:
+    #         self.config = configparser.ConfigParser()
+    #         self.config.read(config_)
+    #     elif type(config_) == configparser.ConfigParser:
+    #         self.config = config_
+
+    def __init__(self):
+        # Read directly from environment variables
+        self.basic_url = os.environ['CHATGPT_BASICURL']
+        self.model_name = os.environ['CHATGPT_MODELNAME']
+        self.api_version = os.environ['CHATGPT_APIVERSION']
+        self.api_key = os.environ['CHATGPT_ACCESS_TOKEN']
+
+    def __init__(self):
+        # Read directly from environment variables
+        self.basic_url = os.environ['CHATGPT_BASICURL']
+        self.model_name = os.environ['CHATGPT_MODELNAME']
+        self.api_version = os.environ['CHATGPT_APIVERSION']
+        self.api_key = os.environ['CHATGPT_ACCESS_TOKEN']
 
     def submit(self, message):
         conversation = [{"role": "user", "content": message}]
